@@ -8,6 +8,7 @@
   --green: #56f2a0;
   --yellow: #ffd166;
   --red: #ff5f7a;
+  --blue: #7aa8ff;
 }
 * { box-sizing: border-box; }
 body {
@@ -40,7 +41,12 @@ h1, h2 { margin: 8px 0 12px; }
 .meter i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--cyan), var(--green)); }
 .pre { white-space: pre-wrap; max-height: 220px; overflow: auto; }
 .list { list-style: none; padding: 0; margin: 8px 0 0; }
-.list li { padding: 6px 0; border-bottom: 1px dashed rgba(123,190,205,.15); }
+.list li { padding: 8px 0; border-bottom: 1px dashed rgba(123,190,205,.15); }
+.list.alerts li { border-left: 3px solid transparent; padding-left: 10px; }
+.list.alerts li.alert-red { border-left-color: var(--red); color: #ffd7df; }
+.list.alerts li.alert-yellow { border-left-color: var(--yellow); color: #ffe9b3; }
+.list.alerts li.alert-green { border-left-color: var(--green); color: #d6ffeb; }
+.list.alerts li.alert-blue { border-left-color: var(--blue); color: #dbe5ff; }
 table { width: 100%; border-collapse: collapse; }
 th, td { text-align: left; padding: 10px 8px; border-bottom: 1px dashed rgba(123,190,205,.15); }
 @media (max-width: 960px) {

@@ -61,6 +61,26 @@
       </article>
 
       <article class="panel">
+        <h2>Cron 监控</h2>
+        <div class="metric"><span>总任务数</span><strong id="cronTotal">--</strong></div>
+        <div class="metric"><span>启用</span><strong id="cronEnabled">--</strong></div>
+        <div class="metric"><span>停用</span><strong id="cronDisabled">--</strong></div>
+        <div>
+          <div class="eyebrow">Jobs</div>
+          <ul id="cronJobs" class="list"></ul>
+        </div>
+      </article>
+
+      <article class="panel">
+        <h2>Session 监控</h2>
+        <div class="metric"><span>已观测会话数</span><strong id="sessionTotal">--</strong></div>
+        <div>
+          <div class="eyebrow">Recent Sessions</div>
+          <ul id="sessions" class="list"></ul>
+        </div>
+      </article>
+
+      <article class="panel">
         <h2>网络与主机</h2>
         <div class="metric"><span>主机名</span><strong id="hostname">--</strong></div>
         <div class="metric"><span>运行时长</span><strong id="uptime">--</strong></div>
@@ -81,9 +101,19 @@
       </article>
 
       <article class="panel wide">
+        <h2>告警面板</h2>
+        <ul id="alerts" class="list alerts"></ul>
+      </article>
+
+      <article class="panel wide">
+        <h2>最近事件</h2>
+        <ul id="events" class="list"></ul>
+      </article>
+
+      <article class="panel wide">
         <h2>高负载进程</h2>
         <table>
-          <thead><tr><th>PID</th><th>Command</th><th>CPU%</th><th>MEM%</th></tr></thead>
+          <thead><tr><th>PID</th><th>Command</th><th>CPU%</th><th>MEM%</th><th>Age(s)</th></tr></thead>
           <tbody id="processes"></tbody>
         </table>
       </article>

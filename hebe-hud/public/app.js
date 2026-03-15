@@ -7,11 +7,12 @@ function fmtUptime(seconds) {
   const m = Math.floor((seconds % 3600) / 60);
   return `${d}d ${h}h ${m}m`;
 }
-function renderList(id, items, mapFn) {
+function renderList(id, items, mapFn, clsFn) {
   const node = el(id); node.innerHTML = '';
   for (const item of items || []) {
     const li = document.createElement('li');
     li.textContent = mapFn(item);
+    if (clsFn) li.className = clsFn(item);
     node.appendChild(li);
   }
   if (!node.children.length) {
@@ -41,18 +42,26 @@ async function refresh() {
   setText('primaryModel', s.openclaw?.primaryModel || 'n/a');
   setText('agentModel', s.openclaw?.currentAgentModel || 'n/a');
   setText('providers', (s.openclaw?.providers || []).join(', ') || 'n/a');
+  setText('cronTotal', s.cron?.total ?? 0);
+  setText('cronEnabled', s.cron?.enabled ?? 0);
+  setText('cronDisabled', s.cron?.disabled ?? 0);
+  setText('sessionTotal', s.sessions?.totalObserved ?? 0);
   setText('hostname', s.host);
   setText('uptime', fmtUptime(s.uptimeSeconds));
   setText('branch', s.git?.branch || 'n/a');
   setText('dirty', s.git?.dirty ? 'DIRTY' : 'CLEAN');
   renderList('channels', s.openclaw?.channels || [], c => `${c.name}: ${c.enabled ? 'enabled' : 'disabled'}`);
+  renderList('cronJobs', s.cron?.jobs || [], j => `${j.name} · ${j.schedule} · ${j.enabled ? 'enabled' : 'disabled'} · ${j.sessionTarget}`);
+  renderList('sessions', s.sessions?.recent || [], x => `${x.sessionKey} · ${x.action} · ${x.age}`);
   renderList('network', s.network || [], n => `${n.iface}: ${n.address}`);
   renderList('changes', s.git?.changes || [], c => c);
+  renderList('alerts', s.alerts || [], a => a.text, a => `alert ${a.level}`);
+  renderList('events', s.recentEvents || [], e => `${e.age} · ${e.event} · ${e.argv || e.source || 'n/a'}`);
   const tbody = el('processes');
   tbody.innerHTML = '';
   for (const p of s.topProcesses || []) {
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${p.pid}</td><td>${p.command}</td><td>${p.cpu}</td><td>${p.mem}</td>`;
+    tr.innerHTML = `<td>${p.pid}</td><td>${p.command}</td><td>${p.cpu}</td><td>${p.mem}</td><td>${p.etimes}</td>`;
     tbody.appendChild(tr);
   }
 }
