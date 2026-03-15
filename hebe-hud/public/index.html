@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hebe HUD</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="scanlines"></div>
+  <main class="wrap">
+    <header class="topbar panel">
+      <div>
+        <div class="eyebrow">HEBE MK.I</div>
+        <h1>System HUD</h1>
+      </div>
+      <div class="status-cluster">
+        <div id="healthBadge" class="badge">BOOTING</div>
+        <div id="generatedAt" class="muted">--</div>
+      </div>
+    </header>
+
+    <section class="hero-grid">
+      <div class="panel hero-card">
+        <div class="eyebrow">COGNITION</div>
+        <div class="big" id="model">--</div>
+        <div class="muted" id="fallbacks">fallbacks: --</div>
+      </div>
+      <div class="panel hero-card">
+        <div class="eyebrow">GATEWAY</div>
+        <div class="big" id="gateway">--</div>
+        <pre id="gatewayText" class="pre small"></pre>
+      </div>
+      <div class="panel hero-card">
+        <div class="eyebrow">HOST</div>
+        <div class="big" id="host">--</div>
+        <div class="muted" id="platform">--</div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="panel">
+        <h2>资源状态</h2>
+        <div class="metric"><span>内存</span><strong id="memory">--</strong></div>
+        <div class="meter"><i id="memoryBar"></i></div>
+        <div class="metric"><span>磁盘</span><strong id="disk">--</strong></div>
+        <div class="meter"><i id="diskBar"></i></div>
+        <div class="metric"><span>CPU 负载</span><strong id="cpu">--</strong></div>
+        <div class="metric"><span>温度</span><strong id="temp">--</strong></div>
+      </article>
+
+      <article class="panel">
+        <h2>OpenClaw</h2>
+        <div class="metric"><span>当前主模型</span><strong id="primaryModel">--</strong></div>
+        <div class="metric"><span>当前代理模型</span><strong id="agentModel">--</strong></div>
+        <div class="metric"><span>Providers</span><strong id="providers">--</strong></div>
+        <div>
+          <div class="eyebrow">Channels</div>
+          <ul id="channels" class="list"></ul>
+        </div>
+      </article>
+
+      <article class="panel">
+        <h2>网络与主机</h2>
+        <div class="metric"><span>主机名</span><strong id="hostname">--</strong></div>
+        <div class="metric"><span>运行时长</span><strong id="uptime">--</strong></div>
+        <div>
+          <div class="eyebrow">IP 地址</div>
+          <ul id="network" class="list"></ul>
+        </div>
+      </article>
+
+      <article class="panel">
+        <h2>工作区 / Git</h2>
+        <div class="metric"><span>分支</span><strong id="branch">--</strong></div>
+        <div class="metric"><span>工作区状态</span><strong id="dirty">--</strong></div>
+        <div>
+          <div class="eyebrow">变更</div>
+          <ul id="changes" class="list"></ul>
+        </div>
+      </article>
+
+      <article class="panel wide">
+        <h2>高负载进程</h2>
+        <table>
+          <thead><tr><th>PID</th><th>Command</th><th>CPU%</th><th>MEM%</th></tr></thead>
+          <tbody id="processes"></tbody>
+        </table>
+      </article>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
